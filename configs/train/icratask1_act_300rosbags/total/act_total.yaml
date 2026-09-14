@@ -1,0 +1,93 @@
+dataset:
+  repo_id: lerobot/1-400
+  root: /home/yuan/bowang/icra_task1/datasets/rgb_300rosbags/lerobot
+  episodes: null
+  image_transforms: {}
+  revision: null
+  use_imagenet_stats: true
+  video_backend: pyav
+  return_uint8: false
+  streaming: false
+training:
+  output_dir: /home/yuan/bowang/icra_task1/training/act_300rosbags
+  job_name: icratask1_act_300rosbags
+  resume: false
+  seed: 1000
+  cudnn_deterministic: false
+  num_workers: 8
+  batch_size: 32
+  prefetch_factor: 4
+  persistent_workers: true
+  steps: 100000
+  eval_freq: 20000
+  log_freq: 200
+  tolerance_s: 0.0001
+  save_checkpoint: true
+  save_freq: 20000
+  use_policy_training_preset: true
+  optimizer: null
+  scheduler:
+    type: cosine_decay_with_warmup
+    num_warmup_steps: 1000
+    num_decay_steps: 100000
+    peak_lr: 1.0e-05
+    decay_lr: 1.0e-06
+  use_rabc: false
+  rabc_progress_path: null
+  rabc_kappa: 0.01
+  rabc_epsilon: 1.0e-06
+  rabc_head_mode: sparse
+  rename_map: {}
+eval:
+  n_episodes: 50
+  batch_size: 0
+  use_async_envs: true
+wandb:
+  enable: false
+  disable_artifact: true
+  project: lerobot_act
+  entity: null
+  notes: null
+  run_id: null
+  mode: null
+  add_tags: true
+peft: null
+policy:
+  type: act
+  n_obs_steps: 1
+  input_features: {}
+  output_features: {}
+  device: cuda
+  use_amp: false
+  use_peft: false
+  push_to_hub: false
+  repo_id: null
+  private: null
+  tags: null
+  license: null
+  pretrained_path: null
+  chunk_size: 100
+  n_action_steps: 100
+  normalization_mapping:
+    VISUAL: MEAN_STD
+    STATE: MEAN_STD
+    ACTION: MEAN_STD
+  vision_backbone: resnet18
+  pretrained_backbone_weights: ResNet18_Weights.IMAGENET1K_V1
+  replace_final_stride_with_dilation: false
+  pre_norm: false
+  dim_model: 512
+  n_heads: 8
+  dim_feedforward: 3200
+  feedforward_activation: relu
+  n_encoder_layers: 4
+  n_decoder_layers: 1
+  use_vae: true
+  latent_dim: 32
+  n_vae_encoder_layers: 4
+  temporal_ensemble_coeff: null
+  dropout: 0.1
+  kl_weight: 10.0
+  optimizer_lr: 1.0e-05
+  optimizer_weight_decay: 0.0001
+  optimizer_lr_backbone: 1.0e-05

@@ -1,0 +1,26 @@
+# One short episode for validating the complete Task1 simulation/eval/video path.
+# Remaining settings inherit from configs/deploy/total/deploy_total.yaml.
+env:
+  inference_env: sim
+  platform_type: "4pro"
+  only_arm: true
+  control_mode: joint
+  which_arm: both
+  eef_type: rq2f85
+  ros_rate: 10
+  image_size: [848, 480]
+  frame_alignment: false
+  ratio: 1.0
+
+inference:
+  policy_type: diffusion
+  pretrained_path: /home/yuan/bowang/icra_task1/training/dp_100rosbags_20260912_153456/checkpoints/100000/pretrained_model
+  eval_episodes: 1
+  seed: 42
+  start_seed: 42
+  device: cuda
+  max_episode_steps: 50
+  task_prompt: "Sort the toys: grasp the animal toys and place them into the right basket, and grasp the car toys and place them into the left basket."
+  async_inference: false
+  rtc_lite_enabled: false
+  rtc_full_enabled: false
